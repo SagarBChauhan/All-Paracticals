@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">All Practicals</string>
+    <string name="text_item_name">Item Name</string>
+    <string-array name="navigation_drawer_item_array">
+        <item>Login</item>
+        <item>Register</item>
+        <item>Forget password</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_fragment">login_fragment</string>
+    <string name="register_fragment">register fragment</string>
+    <string name="forget_password_fragment">forget password fragment</string>
+    <string name="textView_name_co">TFFP</string>
+    <string name="text_mobile_no">Mobile No.</string>
+    <string name="editText_hint_mobile_no">Mobile no.</string>
+    <string name="text_password">Password</string>
+    <string name="EditText_hint_password">Password</string>
+    <string name="textView_forgot_password">Forget password?</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="header_subtitle">User@android.com</string>
+    <string name="header_title">Android Studio</string>
+    <string name="text_subtitle">Company</string>
+    <string name="text_password_confirm">Confirm Password</string>
+    <string name="EditText_hint_password_confirm">Confirm Password</string>
+    <string name="text_email">Email</string>
+    <string name="editText_hint_email">Email</string>
+    <string name="text_first_name">First Name</string>
+    <string name="text_last_name">Last Name</string>
+</resources>
