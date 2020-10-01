@@ -1,5 +1,6 @@
 package com.allpracticals;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -62,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDrawableItems() {
-        drawerItem = new DataModel[2];
-        drawerItem[0] = new DataModel(R.drawable.ic_baseline_account_circle_24, "Login");
-        drawerItem[1] = new DataModel(R.drawable.ic_baseline_assignment_ind_24, "Registration");
+        drawerItem = new DataModel[3];
+        drawerItem[0] = new DataModel(R.drawable.ic_baseline_account_circle_24, getString(R.string.nav_item_login));
+        drawerItem[1] = new DataModel(R.drawable.ic_baseline_assignment_ind_24, getString(R.string.nav_item_register));
+        drawerItem[2] = new DataModel(R.drawable.ic_baseline_list_alt_24, getString(R.string.nav_item_view_user_list));
     }
 
     void setupDrawerToggle() {
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 fragment = new RegisterFragment();
                 break;
+            case 2:
+                Intent intent=new Intent(this,UserActivity.class);
+                startActivity(intent);
+                break;
         }
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -95,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
             mDrawerList.setSelection(position);
             setTitle(mNavigationDrawerItemTitles[position]);
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            Log.e("MainActivity", "Error in creating fragment");
         }
     }
 
