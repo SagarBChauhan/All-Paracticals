@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();
@@ -62,10 +62,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDrawableItems() {
-        drawerItem = new DataModel[3];
+        drawerItem = new DataModel[2];
         drawerItem[0] = new DataModel(R.drawable.ic_baseline_account_circle_24, "Login");
         drawerItem[1] = new DataModel(R.drawable.ic_baseline_assignment_ind_24, "Registration");
-        drawerItem[2] = new DataModel(R.drawable.ic_baseline_vpn_key_24, "Forget password");
     }
 
     void setupDrawerToggle() {
@@ -87,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 fragment = new RegisterFragment();
-                break;
-            case 2:
-                fragment = new ForgetPasswordFragment();
                 break;
         }
         if (fragment != null) {
