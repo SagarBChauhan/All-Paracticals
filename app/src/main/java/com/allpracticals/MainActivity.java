@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
+
     ActionBarDrawerToggle mDrawerToggle;
     DataModel[] drawerItem;
     @BindView(R.id.drawer_layout)

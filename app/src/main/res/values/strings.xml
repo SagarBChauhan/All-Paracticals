@@ -31,4 +31,10 @@
     <string name="nav_item_view_user_list">View User list</string>
     <string name="nav_item_register">Registration</string>
     <string name="nav_item_login">Login</string>
+    <string name="preference_file_key">UserPreferences</string>
+    <string name="preference_name_key">nameKey</string>
+    <string name="preference_email_key">emailKey</string>
+    <string name="session_preference_file_key">SessionPreference</string>
+    <string name="preference_mobile_no_key">mobileNoKey</string>
+    <string name="preference_count_key">countKey</string>
 </resources>
