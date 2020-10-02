@@ -41,4 +41,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="permission_fragment">Runtime Permission Fragment</string>
     <string name="nav_item_permision">Runtime Permissions</string>
+    <string name="positive_button">YES</string>
+    <string name="negative_button">No</string>
+    <string name="neutral_button">Cancel</string>
 </resources>
