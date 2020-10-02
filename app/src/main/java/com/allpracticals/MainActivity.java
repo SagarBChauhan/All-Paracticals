@@ -3,7 +3,6 @@ package com.allpracticals;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,10 +63,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDrawableItems() {
-        drawerItem = new DataModel[3];
-        drawerItem[0] = new DataModel(R.drawable.ic_baseline_account_circle_24, getString(R.string.nav_item_login));
-        drawerItem[1] = new DataModel(R.drawable.ic_baseline_assignment_ind_24, getString(R.string.nav_item_register));
-        drawerItem[2] = new DataModel(R.drawable.ic_baseline_list_alt_24, getString(R.string.nav_item_view_user_list));
+        String[] navTitle = getResources().getStringArray(R.array.navigation_drawer_item_array);
+        int[] navIcon = {R.drawable.ic_baseline_account_circle_24,R.drawable.ic_baseline_assignment_ind_24,R.drawable.ic_baseline_list_alt_24,R.drawable.ic_baseline_verified_user_24};
+
+        drawerItem = new DataModel[navTitle.length];
+        for (int i = 0; i < navTitle.length; i++) {
+            drawerItem[i] = new DataModel(navIcon[i],navTitle[i]);
+        }
     }
 
     void setupDrawerToggle() {
@@ -91,8 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new RegisterFragment();
                 break;
             case 2:
-                Intent intent=new Intent(this,UserActivity.class);
+                Intent intent = new Intent(this, UserActivity.class);
                 startActivity(intent);
+                break;
+            case 3:
+                fragment = new PermissionFragment();
                 break;
         }
         if (fragment != null) {

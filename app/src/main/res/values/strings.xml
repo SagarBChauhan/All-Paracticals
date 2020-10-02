@@ -5,6 +5,7 @@
         <item>Login</item>
         <item>Register</item>
         <item>View user list</item>
+        <item>Runtime Permissions</item>
     </string-array>
     <string name="login_fragment">login fragment</string>
     <string name="register_fragment">register fragment</string>
@@ -37,4 +38,7 @@
     <string name="session_preference_file_key">SessionPreference</string>
     <string name="preference_mobile_no_key">mobileNoKey</string>
     <string name="preference_count_key">countKey</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="permission_fragment">Runtime Permission Fragment</string>
+    <string name="nav_item_permision">Runtime Permissions</string>
 </resources>
