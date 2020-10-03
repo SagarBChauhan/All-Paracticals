@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,6 +82,46 @@ public class PermissionFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_ALL:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
+                }
+                break;
+            case REQUEST_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
+                }
+                break;
+            case REQUEST_CAMERA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA}, REQUEST_ALL)).show();
+                }
+                break;
+            case REQUEST_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_ALL)).show();
+                }
+                break;
+
+        }
     }
 
     @Override
