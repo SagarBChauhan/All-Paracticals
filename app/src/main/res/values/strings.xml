@@ -44,4 +44,5 @@
     <string name="positive_button">YES</string>
     <string name="negative_button">No</string>
     <string name="neutral_button">Cancel</string>
+    <string name="btn_upload">Upload</string>
 </resources>

@@ -3,7 +3,6 @@ package com.allpracticals;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,11 +49,13 @@ public class UserActivity extends AppCompatActivity {
     private void setupUserListData() {
         HashSet<String> stringsN = (HashSet<String>) sharedPreferences.getStringSet(Name, new HashSet<>());
         HashSet<String> stringsE = (HashSet<String>) sharedPreferences.getStringSet(Email, new HashSet<>());
+        assert stringsN != null;
         Object[] arrayN = stringsN.toArray();
+        assert stringsE != null;
         Object[] arrayE = stringsE.toArray();
         users = new User[arrayN.length];
         for (int i = 0; i < arrayN.length; i++) {
-            users[i]=new User(arrayN[i].toString(), arrayE[i].toString());
+            users[i] = new User(arrayN[i].toString(), arrayE[i].toString());
         }
 
     }

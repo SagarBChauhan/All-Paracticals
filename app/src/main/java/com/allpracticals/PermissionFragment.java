@@ -1,8 +1,13 @@
 package com.allpracticals;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +15,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.Objects;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static android.app.Activity.RESULT_OK;
 
 public class PermissionFragment extends Fragment {
     public static final String TAG = "PermissionFragment";
@@ -24,15 +38,80 @@ public class PermissionFragment extends Fragment {
     private static final int REQUEST_CAMERA = 2;
     private static final int REQUEST_ALL = 3;
     private static String[] permissions;
+    @BindView(R.id.iv_avatar)
+    AppCompatImageView iv_avatar;
+    @BindView(R.id.btn_upload)
+    AppCompatButton btn_upload;
+    private int CAPTURE_IMAGE_REQUEST = 0;
+    private int PICK_IMAGE_REQUEST = 1;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init();
-        checkAllPermission();
+        init(view);
     }
 
-    private void init() {
+    @OnClick(R.id.btn_upload)
+    public void onClickUpload(View view) {
+        checkAllPermission();
+        selectImage();
+    }
+
+    private void selectImage() {
+        CharSequence[] options = {"Capture Image", "Choose Image"};
+        new AlertDialog.Builder(getContext()).setTitle("Choose picture")
+                .setItems(options, (dialog, which) -> {
+                    if (options[which].equals("Capture Image")) {
+                        captureImage();
+                    } else if (options[which].equals("Choose Image")) {
+                        chooseImage();
+                    }
+                }).show();
+    }
+
+    private void captureImage() {
+        Intent intent = new Intent();
+//        intent.setType("image/*");
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), CAPTURE_IMAGE_REQUEST);
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 0:
+                if (requestCode == CAPTURE_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+                    Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
+                    iv_avatar.setImageBitmap(bitmap);
+                }
+                break;
+            case 1:
+                if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
+                        iv_avatar.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void init(View view) {
+        ButterKnife.bind(this, view);
+
         permissions = new String[]{
                 Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
