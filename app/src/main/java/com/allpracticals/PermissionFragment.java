@@ -22,11 +22,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -55,57 +52,44 @@ public class PermissionFragment extends Fragment {
         init(view);
     }
 
+    private void init(View view) {
+        ButterKnife.bind(this, view);
+
+        permissions = new String[]{
+                Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION};
+    }
+
     @OnClick(R.id.btn_upload)
     public void onClickUpload(View view) {
-        checkPermissionsUsingTed();
-
-//        checkAllPermission();
+        checkAllPermission();
         selectImage();
     }
 
-    private void checkPermissionsUsingTed() {
-        PermissionListener permissionlistener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(getContext(), "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-            }
-        };
-        TedPermission.with(Objects.requireNonNull(getContext()))
-                .setPermissionListener(permissionlistener)
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > Permissions[STORAGE, CAMERA]")
-                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                .check();
+    private void checkAllPermission() {
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "checkSelfPermission: ALL");
+            requestAllPermissions();
+        } else {
+            Log.i(TAG, "else checkSelfPermission: ALL");
+        }
     }
 
-    private void selectImage() {
-        CharSequence[] options = {"Capture Image", "Choose Image"};
-        new AlertDialog.Builder(getContext()).setTitle("Choose picture")
-                .setItems(options, (dialog, which) -> {
-                    if (options[which].equals("Capture Image")) {
-                        captureImage();
-                    } else if (options[which].equals("Choose Image")) {
-                        chooseImage();
-                    }
-                }).show();
-    }
-
-    private void captureImage() {
-        Intent intent = new Intent();
-//        intent.setType("image/*");
-        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(Intent.createChooser(intent, "Select picture"), CAPTURE_IMAGE_REQUEST);
-    }
-
-    private void chooseImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+    private void requestAllPermissions() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA)
+                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+            Log.i(TAG, "shouldShowRequestPermissionRationale: ALL");
+            Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Required some permission to run application properly.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
+        } else {
+            Log.i(TAG, "else shouldShowRequestPermissionRationale: ALL");
+            ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), permissions, REQUEST_ALL);
+        }
     }
 
     @Override
@@ -148,10 +132,34 @@ public class PermissionFragment extends Fragment {
         }
     }
 
+    private void selectImage() {
+        CharSequence[] options = {"Capture Image", "Choose Image"};
+        new AlertDialog.Builder(getContext()).setTitle("Choose picture")
+                .setItems(options, (dialog, which) -> {
+                    if (options[which].equals("Capture Image")) {
+                        captureImage();
+                    } else if (options[which].equals("Choose Image")) {
+                        chooseImage();
+                    }
+                }).show();
+    }
+
+    private void captureImage() {
+        Intent intent = new Intent();
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), CAPTURE_IMAGE_REQUEST);
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case 0:
                 if (requestCode == CAPTURE_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
@@ -171,40 +179,6 @@ public class PermissionFragment extends Fragment {
                     }
                 }
                 break;
-        }
-    }
-
-    private void init(View view) {
-        ButterKnife.bind(this, view);
-
-        permissions = new String[]{
-                Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION};
-    }
-
-    private void checkAllPermission() {
-        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            Log.i(TAG, "checkSelfPermission: ALL");
-            requestAllPermissions();
-        } else {
-            Log.i(TAG, "else checkSelfPermission: ALL");
-        }
-    }
-
-    private void requestAllPermissions() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA)
-                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Log.i(TAG, "shouldShowRequestPermissionRationale: ALL");
-            Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Required some permission to run application properly.", Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
-        } else {
-            Log.i(TAG, "else shouldShowRequestPermissionRationale: ALL");
-            ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), permissions, REQUEST_ALL);
         }
     }
 

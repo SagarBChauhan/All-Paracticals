@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,14 +46,11 @@ public class UserActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
-
     private void setupUserListData() {
         HashSet<String> stringsN = (HashSet<String>) sharedPreferences.getStringSet(Name, new HashSet<>());
         HashSet<String> stringsE = (HashSet<String>) sharedPreferences.getStringSet(Email, new HashSet<>());
-        assert stringsN != null;
-        Object[] arrayN = stringsN.toArray();
-        assert stringsE != null;
-        Object[] arrayE = stringsE.toArray();
+        Object[] arrayN = Objects.requireNonNull(stringsN).toArray();
+        Object[] arrayE = Objects.requireNonNull(stringsE).toArray();
         users = new User[arrayN.length];
         for (int i = 0; i < arrayN.length; i++) {
             users[i] = new User(arrayN[i].toString(), arrayE[i].toString());

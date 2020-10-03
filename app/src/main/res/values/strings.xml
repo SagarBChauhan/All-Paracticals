@@ -6,6 +6,7 @@
         <item>Register</item>
         <item>View user list</item>
         <item>Runtime Permissions</item>
+        <item>Easy Image picker</item>
     </string-array>
     <string name="login_fragment">login fragment</string>
     <string name="register_fragment">register fragment</string>
@@ -29,6 +30,7 @@
     <string name="tv_user_name">User Name</string>
     <string name="tv_user_email">user@mail.com</string>
     <string name="activity_name_user">User list</string>
+    <string name="activity_name_easy_image">Easy image picker</string>
     <string name="nav_item_view_user_list">View User list</string>
     <string name="nav_item_register">Registration</string>
     <string name="nav_item_login">Login</string>

@@ -18,6 +18,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -64,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDrawableItems() {
         String[] navTitle = getResources().getStringArray(R.array.navigation_drawer_item_array);
-        int[] navIcon = {R.drawable.ic_baseline_account_circle_24,R.drawable.ic_baseline_assignment_ind_24,R.drawable.ic_baseline_list_alt_24,R.drawable.ic_baseline_verified_user_24};
+        int[] navIcon = {R.drawable.ic_baseline_account_circle_24, R.drawable.ic_baseline_assignment_ind_24, R.drawable.ic_baseline_list_alt_24, R.drawable.ic_baseline_verified_user_24, R.drawable.ic_baseline_add_photo_alternate_24};
 
         drawerItem = new DataModel[navTitle.length];
         for (int i = 0; i < navTitle.length; i++) {
-            drawerItem[i] = new DataModel(navIcon[i],navTitle[i]);
+            drawerItem[i] = new DataModel(navIcon[i], navTitle[i]);
         }
     }
 
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     void setupToolBar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
     }
 
     private void selectItem(int position) {
@@ -93,11 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new RegisterFragment();
                 break;
             case 2:
-                Intent intent = new Intent(this, UserActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this, UserActivity.class));
                 break;
             case 3:
                 fragment = new PermissionFragment();
+                break;
+            case 4:
+                startActivity(new Intent(this, EasyImageActivity.class));
                 break;
         }
         if (fragment != null) {
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void setTitle(CharSequence title) {
         mTitle = (String) title;
-        getSupportActionBar().setTitle(mTitle);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(mTitle);
     }
 
     @Override

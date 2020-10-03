@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/permission_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".EasyImageActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:elevation="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_upload"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_rect_solid"
+        android:fontFamily="@font/os_bold"
+        android:text="@string/btn_upload"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
