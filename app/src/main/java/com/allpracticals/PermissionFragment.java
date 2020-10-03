@@ -22,8 +22,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -54,8 +57,29 @@ public class PermissionFragment extends Fragment {
 
     @OnClick(R.id.btn_upload)
     public void onClickUpload(View view) {
-        checkAllPermission();
+        checkPermissionsUsingTed();
+
+//        checkAllPermission();
         selectImage();
+    }
+
+    private void checkPermissionsUsingTed() {
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(getContext(), "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+        };
+        TedPermission.with(Objects.requireNonNull(getContext()))
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > Permissions[STORAGE, CAMERA]")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .check();
     }
 
     private void selectImage() {
