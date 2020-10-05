@@ -3,6 +3,8 @@ package com.allpracticals;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,7 +77,7 @@ public class EasyImageActivity extends AppCompatActivity {
     private void selectImageUsingEasyImage() {
         CharSequence[] options = {"Capture Image", "Choose Image", "Open Chooser"};
 
-        EasyImage easyImage = new EasyImage.Builder(this)
+        easyImage = new EasyImage.Builder(this)
                 .setCopyImagesToPublicGalleryFolder(false)
                 .setFolderName("EasyImage sample")
                 .allowMultiple(true)
@@ -93,13 +95,14 @@ public class EasyImageActivity extends AppCompatActivity {
                 }).show();
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         easyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
             @Override
             public void onMediaFilesPicked(@NotNull MediaFile[] imageFiles, @NotNull MediaSource source) {
-                Toast.makeText(EasyImageActivity.this, "on media file picked", Toast.LENGTH_SHORT).show();
+                iv_avatar.setImageURI(Uri.fromFile(imageFiles[0].getFile()));
             }
 
             @Override

@@ -14,9 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".EasyImageActivity"
-            android:label="@string/activity_name_easy_image" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.allpracticals.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
+        <activity android:name=".EasyImageActivity" />
         <activity
             android:name=".UserActivity"
             android:label="@string/activity_name_user"
