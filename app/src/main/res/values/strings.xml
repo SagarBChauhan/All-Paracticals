@@ -42,9 +42,13 @@
     <string name="preference_count_key">countKey</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="permission_fragment">Runtime Permission Fragment</string>
-    <string name="nav_item_permision">Runtime Permissions</string>
+    <string name="nav_item_permission">Runtime Permissions</string>
     <string name="positive_button">YES</string>
     <string name="negative_button">No</string>
     <string name="neutral_button">Cancel</string>
     <string name="btn_upload">Upload</string>
+    <string name="nav_item_easy_image">Easy image</string>
+    <string name="navigation_drawer_close">navigation drawer close</string>
+    <string name="navigation_drawer_open">navigation drawer open</string>
+    <string name="nav_menu_group_activity">Activity</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,24 +19,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    ActionBarDrawerToggle mDrawerToggle;
-    DataModel[] drawerItem;
     @BindView(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-    @BindView(R.id.left_drawer)
-    ListView mDrawerList;
-
-    private String[] mNavigationDrawerItemTitles;
-    private String mDrawerTitle;
-    private String mTitle;
+    DrawerLayout drawer_layout;
+    @BindView(R.id.navigationView)
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,98 +44,73 @@ public class MainActivity extends AppCompatActivity {
 
     public void init() {
         ButterKnife.bind(this);
-        mTitle = mDrawerTitle = (String) getTitle();
-        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_item_array);
 
         setupToolBar();
-        setDrawableItems();
-
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        setupDrawerToggle();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();
-        mDrawerList.setItemChecked(0, true);
-        mDrawerList.setSelection(0);
-        setTitle(mNavigationDrawerItemTitles[0]);
+        setupDrawerLayout();
+        setupNavigationView();
+        showFirstFragment();
     }
 
-    public void setDrawableItems() {
-        String[] navTitle = getResources().getStringArray(R.array.navigation_drawer_item_array);
-        int[] navIcon = {R.drawable.ic_baseline_account_circle_24, R.drawable.ic_baseline_assignment_ind_24, R.drawable.ic_baseline_list_alt_24, R.drawable.ic_baseline_verified_user_24, R.drawable.ic_baseline_add_photo_alternate_24};
-
-        drawerItem = new DataModel[navTitle.length];
-        for (int i = 0; i < navTitle.length; i++) {
-            drawerItem[i] = new DataModel(navIcon[i], navTitle[i]);
-        }
+    @Override
+    public void onBackPressed() {
+        if (this.drawer_layout.isDrawerOpen(GravityCompat.START))
+            this.drawer_layout.closeDrawer(GravityCompat.START);
+        else super.onBackPressed();
     }
 
-    void setupDrawerToggle() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        mDrawerToggle.syncState();
-    }
-
-    void setupToolBar() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-    }
-
-    private void selectItem(int position) {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        switch (position) {
-            case 0:
+        String title = null;
+        switch (item.getItemId()) {
+            case R.id.nav_menu_login:
                 fragment = new LoginFragment();
+                title=getText(R.string.nav_item_login).toString();
                 break;
-            case 1:
+            case R.id.nav_menu_register:
                 fragment = new RegisterFragment();
+                title=getText(R.string.nav_item_register).toString();
                 break;
-            case 2:
+            case R.id.nav_menu_view_user_list:
                 startActivity(new Intent(this, UserActivity.class));
+                title=getText(R.string.nav_item_view_user_list).toString();
                 break;
-            case 3:
+            case R.id.nav_menu_rt_permission:
                 fragment = new PermissionFragment();
+                title=getText(R.string.nav_item_permission).toString();
                 break;
-            case 4:
+            case R.id.nav_menu_easy_image:
                 startActivity(new Intent(this, EasyImageActivity.class));
+                title=getText(R.string.nav_item_easy_image).toString();
                 break;
         }
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-            mDrawerList.setItemChecked(position, true);
-            mDrawerList.setSelection(position);
-            setTitle(mNavigationDrawerItemTitles[position]);
-            mDrawerLayout.closeDrawer(GravityCompat.START);
+            toolbar.setTitle(title);
+            this.drawer_layout.closeDrawer(GravityCompat.START);
         }
+        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    void setupToolBar() {
+        setSupportActionBar(toolbar);
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = (String) title;
-        Objects.requireNonNull(getSupportActionBar()).setTitle(mTitle);
+    private void setupDrawerLayout() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer_layout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
-    @Override
-    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onPostCreate(savedInstanceState, persistentState);
-        mDrawerToggle.syncState();
+    private void setupNavigationView() {
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
+    private void showFirstFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();
+        toolbar.setTitle(getText(R.string.nav_item_login).toString());
+        this.navigationView.getMenu().getItem(0).setChecked(true);
     }
 }
