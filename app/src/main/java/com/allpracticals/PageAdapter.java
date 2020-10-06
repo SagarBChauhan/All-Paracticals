@@ -9,27 +9,43 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.Objects;
 
 public class PageAdapter extends FragmentPagerAdapter {
-    private int[] colors;
 
-    public PageAdapter(@NonNull FragmentManager fm, int[] colors,int behavior) {
-        super(fm,behavior);
-        this.colors = colors;
+    public PageAdapter(@NonNull FragmentManager fm, int behavior) {
+        super(fm, behavior);
     }
 
     @Override
     public int getCount() {
-        return 5;
+        return 3;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return (PageFragment.newInstance(position, this.colors[position]));
+        switch (position) {
+            case 0:
+                return LoginFragment.newInstance();
+            case 1:
+                return RegisterFragment.newInstance();
+            case 2:
+                return PermissionFragment.newInstance();
+            default:
+                return null;
+        }
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page "+position;
+        switch (position) {
+            case 0:
+                return "Login";
+            case 1:
+                return "Register";
+            case 2:
+                return "Permission";
+            default:
+                return null;
+        }
     }
 }

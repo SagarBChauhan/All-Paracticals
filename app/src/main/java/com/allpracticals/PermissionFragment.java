@@ -46,6 +46,11 @@ public class PermissionFragment extends Fragment {
     private int CAPTURE_IMAGE_REQUEST = 0;
     private int PICK_IMAGE_REQUEST = 1;
 
+    public static PermissionFragment newInstance() {
+        return (new PermissionFragment());
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

@@ -21,6 +21,10 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.edit_text_password)
     AppCompatEditText mPassword;
 
+    public static LoginFragment newInstance() {
+        return (new LoginFragment());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

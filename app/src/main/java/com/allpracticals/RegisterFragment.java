@@ -44,6 +44,11 @@ public class RegisterFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
 
+    public static RegisterFragment newInstance() {
+        return (new RegisterFragment());
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -60,12 +65,14 @@ public class RegisterFragment extends Fragment {
         switch (view.getId()) {
             case (R.id.btn_register):
                 if (isFormValidate()) {
-                    Set<String> nameSet = new HashSet<>();
-                    Set<String> emailSet = new HashSet<>();
+                    Set<String> nameSet;
+                    Set<String> emailSet;
 
                     nameSet = sharedPreferences.getStringSet(Name, new HashSet<>());
                     emailSet = sharedPreferences.getStringSet(Email, new HashSet<>());
 
+                    assert emailSet != null;
+                    assert nameSet != null;
                     if (!emailSet.contains(Objects.requireNonNull(mEmail.getText()).toString()) && !nameSet.contains(Objects.requireNonNull(mFirstName.getText()).toString() + " " + Objects.requireNonNull(mLastName.getText()).toString())) {
                         nameSet.add(Objects.requireNonNull(mFirstName.getText()).toString() + " " + Objects.requireNonNull(mLastName.getText()).toString());
                         emailSet.add(Objects.requireNonNull(mEmail.getText()).toString());

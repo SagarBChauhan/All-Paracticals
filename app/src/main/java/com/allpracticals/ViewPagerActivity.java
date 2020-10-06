@@ -40,7 +40,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
     private void setupViewPagerAndTabs() {
-        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), getResources().getIntArray(R.array.colorPagesViewPager), 0));
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), 0));
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }

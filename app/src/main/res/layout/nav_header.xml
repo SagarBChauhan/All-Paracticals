@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/mountain"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingStart="@dimen/activity_horizontal_margin"
@@ -24,13 +24,15 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/os_bold"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/header_title" />
+        android:text="@string/header_title"
+        android:textColor="@android:color/white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/os_semibold"
-        android:text="@string/header_subtitle" />
+        android:text="@string/header_subtitle"
+        android:textColor="@android:color/darker_gray" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
