@@ -65,23 +65,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_menu_login:
                 fragment = new LoginFragment();
-                title=getText(R.string.nav_item_login).toString();
+                title = getText(R.string.nav_item_login).toString();
                 break;
             case R.id.nav_menu_register:
                 fragment = new RegisterFragment();
-                title=getText(R.string.nav_item_register).toString();
+                title = getText(R.string.nav_item_register).toString();
                 break;
             case R.id.nav_menu_view_user_list:
                 startActivity(new Intent(this, UserActivity.class));
-                title=getText(R.string.nav_item_view_user_list).toString();
+                title = getText(R.string.nav_item_view_user_list).toString();
                 break;
             case R.id.nav_menu_rt_permission:
                 fragment = new PermissionFragment();
-                title=getText(R.string.nav_item_permission).toString();
+                title = getText(R.string.nav_item_permission).toString();
                 break;
             case R.id.nav_menu_easy_image:
                 startActivity(new Intent(this, EasyImageActivity.class));
-                title=getText(R.string.nav_item_easy_image).toString();
+                title = getText(R.string.nav_item_easy_image).toString();
+                break;
+            case R.id.nav_menu_view_pager:
+                startActivity(new Intent(this, ViewPagerActivity.class));
+                title = getText(R.string.nav_item_view_pager).toString();
                 break;
         }
         if (fragment != null) {

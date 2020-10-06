@@ -15,22 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.allpracticals.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
-        </provider>
-
-        <activity android:name=".EasyImageActivity" />
+        <activity
+            android:name=".ViewPagerActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EasyImageActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UserActivity"
             android:label="@string/activity_name_user"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

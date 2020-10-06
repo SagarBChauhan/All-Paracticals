@@ -26,6 +26,10 @@
                     android:id="@+id/nav_menu_easy_image"
                     android:icon="@drawable/ic_baseline_add_photo_alternate_24"
                     android:title="@string/nav_item_easy_image" />
+                <item
+                    android:id="@+id/nav_menu_view_pager"
+                    android:icon="@drawable/ic_baseline_view_carousel_24"
+                    android:title="@string/nav_item_view_pager" />
             </group>
         </menu>
     </item>

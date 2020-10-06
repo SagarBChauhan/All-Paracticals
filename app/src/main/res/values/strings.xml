@@ -51,4 +51,6 @@
     <string name="navigation_drawer_close">navigation drawer close</string>
     <string name="navigation_drawer_open">navigation drawer open</string>
     <string name="nav_menu_group_activity">Activity</string>
+    <string name="nav_item_view_pager">View pager</string>
+    <string name="tv_viewPager">View Pager</string>
 </resources>
