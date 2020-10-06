@@ -1,6 +1,7 @@
 package com.allpracticals;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -24,5 +25,11 @@ public class PageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return (PageFragment.newInstance(position, this.colors[position]));
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "Page "+position;
     }
 }

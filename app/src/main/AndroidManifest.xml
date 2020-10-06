@@ -17,9 +17,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ViewPagerActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:label="@string/activity_view_pager"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EasyImageActivity"
+            android:label="@string/activity_easy_image"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UserActivity"

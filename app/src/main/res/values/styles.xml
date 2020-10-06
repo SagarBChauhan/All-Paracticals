@@ -4,6 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@android:color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -15,7 +16,7 @@
     <!--    Toolbar theme-->
     <style name="ToolBarStyle" parent="AppTheme">
         <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
-
 </resources>

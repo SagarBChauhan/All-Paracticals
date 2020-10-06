@@ -53,4 +53,6 @@
     <string name="nav_menu_group_activity">Activity</string>
     <string name="nav_item_view_pager">View pager</string>
     <string name="tv_viewPager">View Pager</string>
+    <string name="activity_easy_image">Easy Image</string>
+    <string name="activity_view_pager">ViewPager with TabLayout</string>
 </resources>
