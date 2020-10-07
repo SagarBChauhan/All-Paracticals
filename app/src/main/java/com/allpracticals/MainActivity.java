@@ -87,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, ViewPagerActivity.class));
                 title = getText(R.string.nav_item_view_pager).toString();
                 break;
+            case R.id.nav_menu_bottom_nav:
+                startActivity(new Intent(this, BottomNavActivity.class));
+                title = getText(R.string.nav_item_bottom_nav).toString();
+                break;
         }
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

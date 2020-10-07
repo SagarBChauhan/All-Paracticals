@@ -16,9 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".BottomNavActivity"
+            android:label="Bottom Nav"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ViewPagerActivity"
-            android:parentActivityName=".MainActivity"
             android:label="@string/activity_view_pager"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EasyImageActivity"

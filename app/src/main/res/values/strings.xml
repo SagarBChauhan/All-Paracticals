@@ -55,4 +55,8 @@
     <string name="tv_viewPager">View Pager</string>
     <string name="activity_easy_image">Easy Image</string>
     <string name="activity_view_pager">ViewPager with TabLayout</string>
+    <string name="nav_item_bottom_nav">Bottom Navigation</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_view_pager">View pager</string>
+    <string name="nav_account">Account</string>
 </resources>

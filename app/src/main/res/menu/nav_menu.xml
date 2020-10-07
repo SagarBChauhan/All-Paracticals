@@ -30,6 +30,10 @@
                     android:id="@+id/nav_menu_view_pager"
                     android:icon="@drawable/ic_baseline_view_carousel_24"
                     android:title="@string/nav_item_view_pager" />
+                <item
+                    android:id="@+id/nav_menu_bottom_nav"
+                    android:icon="@drawable/ic_baseline_call_to_action_24"
+                    android:title="@string/nav_item_bottom_nav" />
             </group>
         </menu>
     </item>
