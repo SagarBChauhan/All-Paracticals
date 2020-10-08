@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getActivity(), "Mobile number is invalid", Toast.LENGTH_SHORT).show();
             mMobile.requestFocus();
             return false;
-        }
+    }
 
         if (new FormValidation().checkEmptyEditText(mPassword)) {
             Toast.makeText(getActivity(), "Password is empty", Toast.LENGTH_SHORT).show();

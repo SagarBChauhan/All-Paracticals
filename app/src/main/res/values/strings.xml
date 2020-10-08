@@ -59,4 +59,6 @@
     <string name="nav_home">Home</string>
     <string name="nav_view_pager">View pager</string>
     <string name="nav_account">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

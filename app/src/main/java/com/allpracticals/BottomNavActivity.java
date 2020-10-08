@@ -1,22 +1,19 @@
 package com.allpracticals;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BottomNavActivity extends AppCompatActivity {
 
+    private static final String BACK_STACK_ROOT_TAG = "root_fragment";
     @BindView(R.id.bottomNavigationView)
     BottomNavigationView bottomNavigationView;
 
@@ -41,7 +38,7 @@ public class BottomNavActivity extends AppCompatActivity {
                     openFragment(LoginFragment.newInstance());
                     return true;
                 case R.id.navigation_view_pager:
-                    openFragment(RegisterFragment.newInstance());
+                    openFragment(ViewPagerFragment.newInstance());
                     return true;
                 case R.id.navigation_account:
                     openFragment(PermissionFragment.newInstance());
@@ -54,7 +51,7 @@ public class BottomNavActivity extends AppCompatActivity {
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
+        transaction.addToBackStack(BACK_STACK_ROOT_TAG);
         transaction.commit();
     }
 }

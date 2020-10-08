@@ -29,7 +29,6 @@ public class ViewPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_pager);
 
         init();
-
         setupViewPagerAndTabs();
     }
 
@@ -39,9 +38,18 @@ public class ViewPagerActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
+
     private void setupViewPagerAndTabs() {
         viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), 0));
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0)
+            super.onBackPressed();
+        else
+            getSupportFragmentManager().popBackStack();
     }
 }

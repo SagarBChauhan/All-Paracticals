@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import java.util.Objects;
-
 public class PageAdapter extends FragmentPagerAdapter {
 
     public PageAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -36,7 +34,7 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Nullable
     @Override
-    public CharSequence getPageTitle(int position) {
+    public String getPageTitle(int position) {
         switch (position) {
             case 0:
                 return "Login";
