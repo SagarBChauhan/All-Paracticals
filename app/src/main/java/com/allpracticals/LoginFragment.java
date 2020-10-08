@@ -50,9 +50,9 @@ public class LoginFragment extends Fragment {
         switch (view.getId()) {
             case (R.id.btn_login):
                 if (isFormValidate()) {
-                    Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.msg_login_success, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Login Fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.msg_login_fail, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case (R.id.btn_register):
@@ -63,22 +63,22 @@ public class LoginFragment extends Fragment {
 
     public boolean isFormValidate() {
         if (new FormValidation().checkEmptyEditText(mMobile)) {
-            Toast.makeText(getActivity(), "Mobile number is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_mobile_no_empty, Toast.LENGTH_SHORT).show();
             mMobile.requestFocus();
             return false;
         } else if (!new FormValidation().checkMobileNumber(mMobile)) {
-            Toast.makeText(getActivity(), "Mobile number is invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_mobile_no_invalid, Toast.LENGTH_SHORT).show();
             mMobile.requestFocus();
             return false;
     }
 
         if (new FormValidation().checkEmptyEditText(mPassword)) {
-            Toast.makeText(getActivity(), "Password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_password_empty, Toast.LENGTH_SHORT).show();
             mPassword.requestFocus();
             return false;
         } else if (!new FormValidation().checkPassword(mPassword)) {
             mPassword.requestFocus();
-            Toast.makeText(getActivity(), "Password is Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_password_invalid, Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

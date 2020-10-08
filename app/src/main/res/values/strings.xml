@@ -61,4 +61,27 @@
     <string name="nav_account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msg_login_success">Login Success</string>
+    <string name="msg_login_fail">Login Fail</string>
+    <string name="msg_mobile_no_empty">Mobile number is empty</string>
+    <string name="msg_mobile_no_invalid">Mobile number is invalid</string>
+    <string name="msg_password_empty">Password is empty</string>
+    <string name="msg_password_invalid">Password is Invalid</string>
+    <string name="msg_permission_granted">Permission Granted</string>
+    <string name="msg_permission_denied">Permission Denied\n</string>
+    <string name="msg_permission_denied_msg"><![CDATA[If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > Permissions[STORAGE, CAMERA]]]></string>
+    <string name="option_capture_image">Capture Image</string>
+    <string name="option_choose_image">Choose Image</string>
+    <string name="option_open_chooser">Open Chooser</string>
+    <string name="msg_error_occurred">\"error occurred: \"</string>
+    <string name="msg_canceled">canceled</string>
+    <string name="msg_permission_required">Permissions required to application work!</string>
+    <string name="msg_warning_duplicate_entry">Duplicate entry!  \nTry different one</string>
+    <string name="msg_first_name_empty">First name is empty</string>
+    <string name="msg_last_name_empty">Last name is empty</string>
+    <string name="msg_email_empty">Email is empty</string>
+    <string name="msg_email_invalid">email is invalid</string>
+    <string name="msg_confirm_password_empty">Confirm password is empty</string>
+    <string name="msg_confirm_password_invalid">Confirm password is invalid</string>
+    <string name="msg_password_not_matched"><![CDATA[\"Password & Confirm password not matched \"]]></string>
 </resources>

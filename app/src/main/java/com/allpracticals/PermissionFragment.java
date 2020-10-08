@@ -88,11 +88,9 @@ public class PermissionFragment extends Fragment {
         if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA)
                 || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Log.i(TAG, "shouldShowRequestPermissionRationale: ALL");
             Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Required some permission to run application properly.", Snackbar.LENGTH_INDEFINITE)
                     .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
         } else {
-            Log.i(TAG, "else shouldShowRequestPermissionRationale: ALL");
             ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), permissions, REQUEST_ALL);
         }
     }
@@ -103,33 +101,33 @@ public class PermissionFragment extends Fragment {
         switch (requestCode) {
             case REQUEST_ALL:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_permission_granted), Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), R.string.msg_permission_required, Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
                 }
                 break;
             case REQUEST_LOCATION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_permission_granted), Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), R.string.msg_permission_required, Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ALL)).show();
                 }
                 break;
             case REQUEST_CAMERA:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_permission_granted), Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), R.string.msg_permission_required, Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA}, REQUEST_ALL)).show();
                 }
                 break;
             case REQUEST_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_permission_granted), Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), "Permissions required to application work!", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireActivity().findViewById(R.id.permission_fragment), R.string.msg_permission_required, Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.positive_button), v -> ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_ALL)).show();
                 }
                 break;
@@ -138,12 +136,12 @@ public class PermissionFragment extends Fragment {
     }
 
     private void selectImage() {
-        CharSequence[] options = {"Capture Image", "Choose Image"};
-        new AlertDialog.Builder(getContext()).setTitle("Choose picture")
+        CharSequence[] options = {getString(R.string.option_capture_image), getString(R.string.option_choose_image)};
+        new AlertDialog.Builder(getContext()).setTitle(getString(R.string.option_choose_image))
                 .setItems(options, (dialog, which) -> {
-                    if (options[which].equals("Capture Image")) {
+                    if (options[which].equals(getString(R.string.option_capture_image))) {
                         captureImage();
-                    } else if (options[which].equals("Choose Image")) {
+                    } else if (options[which].equals(getString(R.string.option_choose_image))) {
                         chooseImage();
                     }
                 }).show();
@@ -152,14 +150,14 @@ public class PermissionFragment extends Fragment {
     private void captureImage() {
         Intent intent = new Intent();
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(Intent.createChooser(intent, "Select picture"), CAPTURE_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.option_capture_image)), CAPTURE_IMAGE_REQUEST);
     }
 
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.option_choose_image)), PICK_IMAGE_REQUEST);
     }
 
     @Override

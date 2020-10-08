@@ -80,14 +80,14 @@ public class RegisterFragment extends Fragment {
                         editor.putStringSet(Name, nameSet);
                         editor.putStringSet(Email, emailSet);
                         editor.apply();
-                        Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.msg_login_success), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getActivity(), UserActivity.class));
                     } else {
-                        Toast.makeText(getActivity(), "Duplicate entry!  \nTry different one", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.msg_warning_duplicate_entry, Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(getContext(), "Login Fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.msg_login_fail), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case (R.id.btn_login):
@@ -98,61 +98,61 @@ public class RegisterFragment extends Fragment {
 
     private boolean isFormValidate() {
         if (new FormValidation().checkEmptyEditText(mFirstName)) {
-            Toast.makeText(getActivity(), "First name is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_first_name_empty, Toast.LENGTH_SHORT).show();
             mFirstName.requestFocus();
             return false;
         }
         if (new FormValidation().checkEmptyEditText(mLastName)) {
-            Toast.makeText(getActivity(), "Last name is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_last_name_empty, Toast.LENGTH_SHORT).show();
             mLastName.requestFocus();
             return false;
         }
         if (new FormValidation().checkEmptyEditText(mEmail)) {
-            Toast.makeText(getActivity(), "Email is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_email_empty, Toast.LENGTH_SHORT).show();
             mEmail.requestFocus();
             return false;
         } else {
             if (!new FormValidation().checkEmail(mEmail)) {
-                Toast.makeText(getActivity(), "email is invalid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.msg_email_invalid, Toast.LENGTH_SHORT).show();
                 mEmail.requestFocus();
                 return false;
             }
         }
         if (new FormValidation().checkEmptyEditText(mMobileNo)) {
-            Toast.makeText(getActivity(), "Mobile number is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_mobile_no_empty, Toast.LENGTH_SHORT).show();
             mMobileNo.requestFocus();
             return false;
         } else {
             if (!new FormValidation().checkMobileNumber(mMobileNo)) {
-                Toast.makeText(getActivity(), "Invalid mobile number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.msg_mobile_no_invalid, Toast.LENGTH_SHORT).show();
                 mMobileNo.requestFocus();
                 return false;
             }
         }
         if (new FormValidation().checkEmptyEditText(mPassword)) {
-            Toast.makeText(getActivity(), "Password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_password_empty, Toast.LENGTH_SHORT).show();
             mPassword.requestFocus();
             return false;
         } else {
             if (!new FormValidation().checkPassword(mPassword)) {
-                Toast.makeText(getActivity(), "Password is invalid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.msg_password_invalid, Toast.LENGTH_SHORT).show();
                 mPassword.requestFocus();
                 return false;
             }
         }
         if (new FormValidation().checkEmptyEditText(mConfPassword)) {
-            Toast.makeText(getActivity(), "Confirm password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_confirm_password_empty, Toast.LENGTH_SHORT).show();
             mConfPassword.requestFocus();
             return false;
         } else {
             if (!new FormValidation().checkPassword(mConfPassword)) {
-                Toast.makeText(getActivity(), "Confirm password is invalid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.msg_confirm_password_invalid, Toast.LENGTH_SHORT).show();
                 mConfPassword.requestFocus();
                 return false;
             }
         }
         if (!new FormValidation().checkConfirmPassword(mPassword, mConfPassword)) {
-            Toast.makeText(getActivity(), "Password & Confirm password not matched ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.msg_password_not_matched, Toast.LENGTH_SHORT).show();
             mConfPassword.requestFocus();
             return false;
         }

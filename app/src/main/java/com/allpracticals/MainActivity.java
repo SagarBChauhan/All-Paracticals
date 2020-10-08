@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-    }
-
-    public void init() {
-        ButterKnife.bind(this);
 
         setupToolBar();
         setupDrawerLayout();
         setupNavigationView();
         showFirstFragment();
+    }
+
+    public void init() {
+        ButterKnife.bind(this);
     }
 
     @Override

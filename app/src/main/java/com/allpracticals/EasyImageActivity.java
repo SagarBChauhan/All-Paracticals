@@ -59,23 +59,23 @@ public class EasyImageActivity extends AppCompatActivity {
         PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
-                Log.i(TAG, "Permission Granted");
+                Log.i(TAG, getString(R.string.msg_permission_granted));
             }
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Log.i(TAG, "Permission Denied\n" + deniedPermissions.toString());
+                Log.i(TAG, getString(R.string.msg_permission_denied) + deniedPermissions.toString());
             }
         };
         TedPermission.with(this)
                 .setPermissionListener(permissionlistener)
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > Permissions[STORAGE, CAMERA]")
+                .setDeniedMessage(R.string.msg_permission_denied_msg)
                 .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
     }
 
     private void selectImageUsingEasyImage() {
-        CharSequence[] options = {"Capture Image", "Choose Image", "Open Chooser"};
+        CharSequence[] options = {getString(R.string.option_capture_image), getString(R.string.option_choose_image), getString(R.string.option_open_chooser)};
 
         easyImage = new EasyImage.Builder(this)
                 .setCopyImagesToPublicGalleryFolder(false)
@@ -83,13 +83,13 @@ public class EasyImageActivity extends AppCompatActivity {
                 .allowMultiple(true)
                 .build();
 
-        new AlertDialog.Builder(this).setTitle("Choose picture")
+        new AlertDialog.Builder(this).setTitle(getString(R.string.option_choose_image))
                 .setItems(options, (dialog, which) -> {
-                    if (options[which].equals("Capture Image")) {
+                    if (options[which].equals(getString(R.string.option_capture_image))) {
                         easyImage.openCameraForImage(this);
-                    } else if (options[which].equals("Choose Image")) {
+                    } else if (options[which].equals( getString(R.string.option_choose_image))) {
                         easyImage.openGallery(this);
-                    } else if (options[which].equals("Open Chooser")) {
+                    } else if (options[which].equals(getString(R.string.option_open_chooser))) {
                         easyImage.openChooser(this);
                     }
                 }).show();
@@ -107,13 +107,13 @@ public class EasyImageActivity extends AppCompatActivity {
 
             @Override
             public void onImagePickerError(@NonNull Throwable error, @NonNull MediaSource source) {
-                Toast.makeText(EasyImageActivity.this, "on image picker error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EasyImageActivity.this, getString(R.string.msg_error_occurred)+ error.getMessage(), Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
 
             @Override
             public void onCanceled(@NonNull MediaSource source) {
-                Toast.makeText(EasyImageActivity.this, "on cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EasyImageActivity.this, R.string.msg_canceled, Toast.LENGTH_SHORT).show();
             }
         });
     }
