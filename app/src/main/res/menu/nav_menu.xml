@@ -34,6 +34,10 @@
                     android:id="@+id/nav_menu_bottom_nav"
                     android:icon="@drawable/ic_baseline_call_to_action_24"
                     android:title="@string/nav_item_bottom_nav" />
+                <item
+                    android:id="@+id/nav_menu_retrofit"
+                    android:icon="@drawable/ic_baseline_settings_system_daydream_24"
+                    android:title="@string/nav_item_retrofit" />
             </group>
         </menu>
     </item>
