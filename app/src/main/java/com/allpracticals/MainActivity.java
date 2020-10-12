@@ -83,10 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, BottomNavActivity.class));
                 title = getText(R.string.nav_item_bottom_nav).toString();
                 break;
-            case R.id.nav_menu_retrofit:
-                startActivity(new Intent(this, RetrofitActivity.class));
-                title = getText(R.string.nav_item_retrofit).toString();
-                break;
         }
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

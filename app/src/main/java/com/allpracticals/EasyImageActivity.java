@@ -3,6 +3,7 @@ package com.allpracticals;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +87,7 @@ public class EasyImageActivity extends AppCompatActivity {
                 .setItems(options, (dialog, which) -> {
                     if (options[which].equals(getString(R.string.option_capture_image))) {
                         easyImage.openCameraForImage(this);
-                    } else if (options[which].equals(getString(R.string.option_choose_image))) {
+                    } else if (options[which].equals( getString(R.string.option_choose_image))) {
                         easyImage.openGallery(this);
                     } else if (options[which].equals(getString(R.string.option_open_chooser))) {
                         easyImage.openChooser(this);
@@ -106,7 +107,7 @@ public class EasyImageActivity extends AppCompatActivity {
 
             @Override
             public void onImagePickerError(@NonNull Throwable error, @NonNull MediaSource source) {
-                Toast.makeText(EasyImageActivity.this, getString(R.string.msg_error_occurred) + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EasyImageActivity.this, getString(R.string.msg_error_occurred)+ error.getMessage(), Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
 
