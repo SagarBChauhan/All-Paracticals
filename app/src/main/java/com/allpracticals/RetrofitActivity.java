@@ -1,6 +1,7 @@
 package com.allpracticals;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 public class RetrofitActivity extends AppCompatActivity {
 
     private static final String TAG = "RetrofitActivity";
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.responseText)
     AppCompatTextView responseText;
     APIInterface apiInterface;
@@ -148,7 +150,7 @@ public class RetrofitActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call<UserList> call, @NotNull Response<UserList> response) {
                 UserList userList = response.body();
                 assert userList != null;
-                Integer text =  userList.page;
+                Integer text = userList.page;
                 Integer total = userList.total;
                 Integer totalPages = userList.totalPages;
                 List<UserList.Datum> datumList = userList.data;
