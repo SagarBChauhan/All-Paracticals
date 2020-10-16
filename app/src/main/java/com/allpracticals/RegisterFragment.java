@@ -1,5 +1,6 @@
 package com.allpracticals;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,16 +30,22 @@ public class RegisterFragment extends Fragment {
     public static final String Email = String.valueOf(R.string.preference_email_key);
     public static final String Count = String.valueOf(R.string.preference_count_key);
 
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_first_name)
     AppCompatEditText mFirstName;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_last_name)
     AppCompatEditText mLastName;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_email)
     AppCompatEditText mEmail;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_mobile_no)
     AppCompatEditText mMobileNo;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_password)
     AppCompatEditText mPassword;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_password_confirm)
     AppCompatEditText mConfPassword;
 
@@ -52,6 +59,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Objects.requireNonNull(getActivity()).setTitle(getText(R.string.nav_item_register).toString());
         init(view);
     }
 
@@ -91,7 +99,11 @@ public class RegisterFragment extends Fragment {
                 }
                 break;
             case (R.id.btn_login):
-                Toast.makeText(getActivity(), "Login button click", Toast.LENGTH_SHORT).show();
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new LoginFragment(), "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+                getActivity().setTitle("Login");
                 break;
         }
     }

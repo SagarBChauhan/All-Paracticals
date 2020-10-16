@@ -1,5 +1,6 @@
 package com.allpracticals;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginFragment extends Fragment {
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_mobile_no)
     AppCompatEditText mMobile;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.edit_text_password)
     AppCompatEditText mPassword;
 
@@ -33,6 +38,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Objects.requireNonNull(getActivity()).setTitle(getText(R.string.nav_item_login).toString());
         init(view);
     }
 
@@ -56,7 +62,11 @@ public class LoginFragment extends Fragment {
                 }
                 break;
             case (R.id.btn_register):
-                Toast.makeText(getActivity(), "Register button click", Toast.LENGTH_SHORT).show();
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new RegisterFragment(), "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+                getActivity().setTitle("Register");
                 break;
         }
     }
@@ -70,7 +80,7 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.msg_mobile_no_invalid, Toast.LENGTH_SHORT).show();
             mMobile.requestFocus();
             return false;
-    }
+        }
 
         if (new FormValidation().checkEmptyEditText(mPassword)) {
             Toast.makeText(getActivity(), R.string.msg_password_empty, Toast.LENGTH_SHORT).show();

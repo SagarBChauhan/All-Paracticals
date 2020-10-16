@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showFirstFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(id.content_frame, new LoginFragment()).commit();
-        toolbar.setTitle(getText(string.nav_item_login).toString());
+        setTitle(getText(string.nav_item_login).toString());
         this.navigationView.getMenu().getItem(0).setChecked(true);
     }
 }
