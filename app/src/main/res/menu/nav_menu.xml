@@ -38,6 +38,10 @@
                     android:id="@+id/nav_menu_retrofit"
                     android:icon="@drawable/ic_baseline_settings_system_daydream_24"
                     android:title="@string/nav_item_retrofit" />
+                <item
+                    android:id="@+id/nav_menu_sqLiteDB"
+                    android:icon="@drawable/ic_baseline_settings_system_daydream_24"
+                    android:title="@string/nav_item_sqLiteDB" />
             </group>
         </menu>
     </item>

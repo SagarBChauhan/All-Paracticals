@@ -84,4 +84,13 @@
     <string name="msg_password_not_matched"><![CDATA[\"Password & Confirm password not matched \"]]></string>
     <string name="nav_item_retrofit">Retrofit</string>
     <string name="api_response_text">API Response text.</string>
+    <string name="empty_list_text">No record found</string>
+    <string name="tv_id">Id</string>
+    <string name="add_record">Add record</string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_desc">Enter description</string>
+    <string name="nav_item_sqLiteDB">sqLite DB</string>
+    <string name="update_country">Update Country</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_delete">Delete</string>
 </resources>
